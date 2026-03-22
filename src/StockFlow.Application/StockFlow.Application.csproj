@@ -10,6 +10,20 @@
     <PackageReference Include="MediatR" Version="14.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Movements\Commands\RegisterMovement\" />
+    <Folder Include="Movements\Queries\GetMovements\" />
+    <Folder Include="Products\Commands\DeleteProduct\" />
+    <Folder Include="Products\Commands\CreateProduct\" />
+    <Folder Include="Products\Commands\UpdateProduct\" />
+    <Folder Include="Products\Queries\GetProducts\" />
+    <Folder Include="Products\Queries\GetProductById\" />
+    <Folder Include="Suppliers\Commands\CreateSupplier\" />
+    <Folder Include="Suppliers\Commands\DeleteSupplier\" />
+    <Folder Include="Suppliers\Commands\UpdateSupplier\" />
+    <Folder Include="Suppliers\Queries\GetSuppliers\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
