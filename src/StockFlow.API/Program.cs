@@ -1,5 +1,6 @@
 using StockFlow.Application;
 using StockFlow.Infrastructure;
+using StockFlow.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
