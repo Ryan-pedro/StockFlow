@@ -1,8 +1,8 @@
-# StockFlow 📦
+# StockFlow 
 
 Sistema de controle de inventário desenvolvido como projeto de portfólio.
 
-## 🚀 Tecnologias
+##  Tecnologias
 
 **Backend**
 - C# / .NET 8
@@ -19,11 +19,11 @@ Sistema de controle de inventário desenvolvido como projeto de portfólio.
 - TypeScript
 - Angular Material
 
-## 🏗️ Arquitetura
+##  Arquitetura
 
 Clean Architecture + CQRS + Repository Pattern + SOLID
 
-## ▶️ Como rodar
+## Como rodar
 
 ### Pré-requisitos
 - .NET 8 SDK
@@ -43,7 +43,7 @@ Swagger disponível em: `https://localhost:7000/swagger`
 dotnet ef database update --project src/StockFlow.Infrastructure --startup-project src/StockFlow.API
 ```
 
-## 📁 Estrutura
+##  Estrutura
 ```
 StockFlow/
 ├── src/
