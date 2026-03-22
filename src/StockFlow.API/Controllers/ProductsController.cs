@@ -1,5 +1,6 @@
 ﻿namespace StockFlow.API.Controllers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockFlow.Application.Products.Commands.CreateProduct;
 using StockFlow.Application.Products.Commands.DeleteProduct;
@@ -7,6 +8,7 @@ using StockFlow.Application.Products.Commands.UpdateProduct;
 using StockFlow.Application.Products.Queries.GetProductById;
 using StockFlow.Application.Products.Queries.GetProducts;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase

@@ -3,7 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using StockFlow.Application.Movements.Commands.RegisterMovement;
 using StockFlow.Application.Movements.Queries.GetMovements;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class MovementsController : ControllerBase

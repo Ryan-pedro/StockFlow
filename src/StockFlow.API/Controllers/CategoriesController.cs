@@ -6,7 +6,9 @@ using StockFlow.Application.Categories.Commands.DeleteCategory;
 using StockFlow.Application.Categories.Commands.UpdateCategory;
 using StockFlow.Application.Categories.Queries.GetCategories;
 using StockFlow.Application.Categories.Queries.GetCategoryById;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class CategoriesController : ControllerBase

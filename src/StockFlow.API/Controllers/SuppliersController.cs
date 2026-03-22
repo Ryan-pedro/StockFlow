@@ -1,11 +1,13 @@
 ﻿namespace StockFlow.API.Controllers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockFlow.Application.Suppliers.Commands.CreateSupplier;
 using StockFlow.Application.Suppliers.Commands.DeleteSupplier;
 using StockFlow.Application.Suppliers.Commands.UpdateSupplier;
 using StockFlow.Application.Suppliers.Queries.GetSuppliers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class SuppliersController : ControllerBase
