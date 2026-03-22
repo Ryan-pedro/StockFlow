@@ -43,4 +43,8 @@ public class ProductRepository : IProductRepository
 
     public void Remove(Product product)
         => _context.Products.Update(product); // soft delete
+    public async Task<int> GetTotalStockItemsAsync(CancellationToken ct = default)
+    => await _context.Products
+        .Where(p => p.IsActive)
+        .SumAsync(p => p.StockQuantity, ct);
 }
