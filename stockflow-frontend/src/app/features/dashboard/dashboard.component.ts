@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,93 +8,93 @@ import { DashboardService } from '../../core/services/dashboard.service';
 import { Dashboard } from '../../core/models/dashboard.model';
 
 @Component({
-    selector: 'app-dashboard',
-    standalone: true,
-    imports: [CommonModule, MatCardModule, MatIconModule, MatTableModule, MatChipsModule],
-    template: `
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatIconModule, MatTableModule, MatChipsModule],
+  template: `
     <div class="dashboard">
-        <h2 class="page-title">Dashboard</h2>
+      <h2 class="page-title">Dashboard</h2>
 
       <div class="cards-grid" *ngIf="data">
         <mat-card class="stat-card blue">
-            <mat-icon>inventory</mat-icon>
-            <div>
+          <mat-icon>inventory</mat-icon>
+          <div>
             <span class="stat-label">Total de Produtos</span>
             <span class="stat-value">{{ data.totalProducts }}</span>
-            </div>
+          </div>
         </mat-card>
         <mat-card class="stat-card teal">
-            <mat-icon>storage</mat-icon>
-            <div>
+          <mat-icon>storage</mat-icon>
+          <div>
             <span class="stat-label">Itens em Estoque</span>
             <span class="stat-value">{{ data.totalStockItems }}</span>
-            </div>
+          </div>
         </mat-card>
         <mat-card class="stat-card orange">
-            <mat-icon>warning</mat-icon>
-            <div>
+          <mat-icon>warning</mat-icon>
+          <div>
             <span class="stat-label">Estoque Baixo</span>
             <span class="stat-value">{{ data.lowStockCount }}</span>
-            </div>
+          </div>
         </mat-card>
         <mat-card class="stat-card green">
-            <mat-icon>swap_horiz</mat-icon>
-            <div>
+          <mat-icon>swap_horiz</mat-icon>
+          <div>
             <span class="stat-label">Movimentações Hoje</span>
             <span class="stat-value">{{ data.movementsToday }}</span>
-            </div>
+          </div>
         </mat-card>
-        </div>
+      </div>
 
       <div class="tables-grid" *ngIf="data">
         <mat-card>
-            <mat-card-header>
+          <mat-card-header>
             <mat-card-title>Produtos com Estoque Baixo</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
+          </mat-card-header>
+          <mat-card-content>
             <table mat-table [dataSource]="data.lowStockProducts" class="full-width">
-                <ng-container matColumnDef="name">
+              <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Produto</th>
                 <td mat-cell *matCellDef="let p">{{ p.name }}</td>
-                </ng-container>
-                <ng-container matColumnDef="stockQuantity">
+              </ng-container>
+              <ng-container matColumnDef="stockQuantity">
                 <th mat-header-cell *matHeaderCellDef>Estoque</th>
                 <td mat-cell *matCellDef="let p">
-                    <mat-chip color="warn" highlighted>{{ p.stockQuantity }}</mat-chip>
+                  <mat-chip color="warn" highlighted>{{ p.stockQuantity }}</mat-chip>
                 </td>
-                </ng-container>
-                <ng-container matColumnDef="minimumStock">
+              </ng-container>
+              <ng-container matColumnDef="minimumStock">
                 <th mat-header-cell *matHeaderCellDef>Mínimo</th>
                 <td mat-cell *matCellDef="let p">{{ p.minimumStock }}</td>
-                </ng-container>
+              </ng-container>
               <tr mat-header-row *matHeaderRowDef="['name','stockQuantity','minimumStock']"></tr>
               <tr mat-row *matRowDef="let row; columns: ['name','stockQuantity','minimumStock']"></tr>
             </table>
-            </mat-card-content>
+          </mat-card-content>
         </mat-card>
 
         <mat-card>
-            <mat-card-header>
+          <mat-card-header>
             <mat-card-title>Movimentações Recentes</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
+          </mat-card-header>
+          <mat-card-content>
             <table mat-table [dataSource]="data.recentMovements" class="full-width">
-                <ng-container matColumnDef="productName">
+              <ng-container matColumnDef="productName">
                 <th mat-header-cell *matHeaderCellDef>Produto</th>
                 <td mat-cell *matCellDef="let m">{{ m.productName }}</td>
-                </ng-container>
-                <ng-container matColumnDef="type">
+              </ng-container>
+              <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef>Tipo</th>
                 <td mat-cell *matCellDef="let m">
-                    <mat-chip [color]="m.type === 'Entry' ? 'primary' : 'warn'" highlighted>
+                  <mat-chip [color]="m.type === 'Entry' ? 'primary' : 'warn'" highlighted>
                     {{ m.type === 'Entry' ? 'Entrada' : 'Saída' }}
-                    </mat-chip>
+                  </mat-chip>
                 </td>
-                </ng-container>
-                <ng-container matColumnDef="quantity">
+              </ng-container>
+              <ng-container matColumnDef="quantity">
                 <th mat-header-cell *matHeaderCellDef>Qtd</th>
                 <td mat-cell *matCellDef="let m">{{ m.quantity }}</td>
-                </ng-container>
+              </ng-container>
               <tr mat-header-row *matHeaderRowDef="['productName','type','quantity']"></tr>
               <tr mat-row *matRowDef="let row; columns: ['productName','type','quantity']"></tr>
             </table>
@@ -105,19 +105,8 @@ import { Dashboard } from '../../core/models/dashboard.model';
   `,
   styles: [`
     .page-title { margin: 0 0 24px; color: #1B2A4A; font-size: 24px; }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .stat-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px !important;
-      color: white;
-    }
+    .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .stat-card { display: flex; align-items: center; gap: 16px; padding: 20px !important; color: white; }
     .stat-card mat-icon { font-size: 36px; width: 36px; height: 36px; opacity: 0.9; }
     .stat-card.blue { background: #1E5FA8; }
     .stat-card.teal { background: #17A8A8; }
@@ -132,9 +121,15 @@ import { Dashboard } from '../../core/models/dashboard.model';
 export class DashboardComponent implements OnInit {
   data?: Dashboard;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.dashboardService.get().subscribe(data => this.data = data);
+    this.dashboardService.get().subscribe(data => {
+      this.data = data;
+      this.cdr.detectChanges();
+    });
   }
 }
