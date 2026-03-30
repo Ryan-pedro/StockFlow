@@ -34,6 +34,13 @@ public class MovementRepository : IMovementRepository
             .OrderByDescending(m => m.MovementDate)
             .Take(count)
             .ToListAsync(ct);
+    public async Task<IEnumerable<Movement>> GetAllAsync(CancellationToken ct = default)
+    => await _context.Movements
+        .AsNoTracking()
+        .Include(m => m.Product)
+        .Include(m => m.User)
+        .OrderByDescending(m => m.MovementDate)
+        .ToListAsync(ct);
 
     public async Task<int> GetTodayCountAsync(CancellationToken ct = default)
         => await _context.Movements

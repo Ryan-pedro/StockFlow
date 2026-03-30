@@ -4,6 +4,7 @@ using StockFlow.Domain.Entities;
 public interface IMovementRepository
 {
     Task<Movement?> GetByIdAsync(Guid id, CancellationToken ct = default);
+    Task<IEnumerable<Movement>> GetAllAsync(CancellationToken ct = default);
     Task<IEnumerable<Movement>> GetByProductIdAsync(Guid productId, CancellationToken ct = default);
     Task<IEnumerable<Movement>> GetRecentAsync(int count, CancellationToken ct = default);
     Task<int> GetTodayCountAsync(CancellationToken ct = default);

@@ -19,7 +19,7 @@ public class GetMovementsQueryHandler : IRequestHandler<GetMovementsQuery, IEnum
     {
         var movements = query.ProductId.HasValue
             ? await _repository.GetByProductIdAsync(query.ProductId.Value, ct)
-            : await _repository.GetByProductIdAsync(Guid.Empty, ct);
+            : await _repository.GetAllAsync(ct);
 
         return _mapper.Map<IEnumerable<MovementDto>>(movements);
     }

@@ -11,8 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
   template: `
     <div class="sidebar">
       <div class="sidebar-logo">
-        <mat-icon>inventory_2</mat-icon>
-        <span>StockFlow</span>
+        <img src="logo.png" alt="StockFlow" class="logo-img">
       </div>
       <mat-nav-list>
         <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
@@ -38,11 +37,11 @@ import { AuthService } from '../../core/services/auth.service';
       </mat-nav-list>
     </div>
   `,
-  styles: [`
+styles: [`
     .sidebar {
       width: 240px;
       height: 100vh;
-      background: #1B2A4A;
+      background: #000000;
       color: white;
       display: flex;
       flex-direction: column;
@@ -50,23 +49,41 @@ import { AuthService } from '../../core/services/auth.service';
     .sidebar-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 24px 16px;
-      font-size: 20px;
-      font-weight: 700;
+      justify-content: center;
+      padding: 20px 16px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
+    .logo-img {
+      width: 180px;
+      object-fit: contain;
+      animation: fadeInDown 0.6s ease;
+      transition: transform 0.3s ease;
+    }
+    .logo-img:hover {
+      transform: scale(1.08);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 2; transform: translateY(0); }
+    }
     mat-nav-list a {
-      color: rgba(255,255,255,0.7) !important;
+      color: white !important;
       margin: 4px 8px;
       border-radius: 8px;
+      transition: all 0.2s ease !important;
     }
     mat-nav-list a.active {
       background: rgba(255,255,255,0.15) !important;
       color: white !important;
     }
     mat-nav-list a:hover {
-      background: rgba(255,255,255,0.1) !important;
+      background: rgba(255, 255, 255, 0.14) !important;
+      color: rgba(255,255,255,0.7) !important;
+    }
+    mat-nav-list mat-icon {
+      color: white !important;
+    }
+    :host ::ng-deep .mdc-list-item__primary-text {
       color: white !important;
     }
   `]

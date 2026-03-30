@@ -21,8 +21,7 @@ import { CommonModule } from '@angular/common';
     <div class="login-container">
       <mat-card class="login-card">
         <div class="login-logo">
-          <mat-icon>inventory_2</mat-icon>
-          <h1>StockFlow</h1>
+          <img src="logo.png" alt="StockFlow" class="logo-img">
           <p>Bem-vindo ao sistema de controle de inventário</p>
         </div>
         <mat-card-content>
@@ -89,6 +88,15 @@ import { CommonModule } from '@angular/common';
       font-size: 14px;
       margin-bottom: 8px;
       text-align: center;
+    }
+    .login-logo img.logo-img {
+      width: 200px;
+      margin-bottom: 8px;
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
     }
   `]
 })
