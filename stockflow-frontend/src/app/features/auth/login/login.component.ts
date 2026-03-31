@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
       <mat-card class="login-card">
         <div class="login-logo">
           <img src="logo.png" alt="StockFlow" class="logo-img">
-          <p>Bem-vindo ao sistema de controle de inventário</p>
+          <p>Bem-vindo ao <i>StockFlow Inventory Management</i></p>
         </div>
         <mat-card-content>
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -93,6 +93,7 @@ import { CommonModule } from '@angular/common';
       width: 200px;
       margin-bottom: 8px;
       animation: fadeIn 0.8s ease;
+      filter: brightness(0);
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.9); }
