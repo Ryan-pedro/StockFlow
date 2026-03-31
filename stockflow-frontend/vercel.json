@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "builds": [
+    {
+        "src": "stockflow-frontend/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+        "distDir": "dist/stockflow-frontend/browser"
+    }
+    }
+    ],
+    "routes": [
+    {
+        "src": "/(.*)",
+        "dest": "/index.html"
+    }
+    ]
+}

@@ -9,17 +9,14 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         builder.ToTable("Categories");
         builder.HasKey(c => c.Id);
-
-        builder.Property(c => c.Id).HasDefaultValueSql("NEWSEQUENTIALID()");
+        builder.Property(c => c.Id).HasDefaultValueSql("gen_random_uuid()");
         builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
         builder.Property(c => c.Description).HasMaxLength(500);
         builder.Property(c => c.IsActive).HasDefaultValue(true);
-        builder.Property(c => c.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
-
+        builder.Property(c => c.CreatedAt).HasDefaultValueSql("now()");
         builder.HasIndex(c => c.Name)
                .IsUnique()
                .HasDatabaseName("UQ_Categories_Name");
-
         builder.HasMany(c => c.Products)
                .WithOne(p => p.Category)
                .HasForeignKey(p => p.CategoryId)

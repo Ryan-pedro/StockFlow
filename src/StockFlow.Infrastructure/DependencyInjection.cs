@@ -18,16 +18,9 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services.AddDbContext<StockFlowDbContext>(options =>
-            options.UseSqlServer(
+            options.UseNpgsql(
                 configuration.GetConnectionString("DefaultConnection"),
-                sql =>
-                {
-                    sql.MigrationsAssembly("StockFlow.Infrastructure");
-                    sql.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd: null);
-                }));
+                sql => sql.MigrationsAssembly("StockFlow.Infrastructure")));
 
         services.AddAuthentication(options =>
         {
